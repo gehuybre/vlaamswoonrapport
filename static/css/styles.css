@@ -35,6 +35,15 @@ body, html {
     margin-top: 80px;
 }
 
+/* Media query voor kleinere schermen */
+@media (max-width: 768px) {
+    .content-wrapper {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%; /* Gebruik de volledige breedte van het scherm */
+    }
+}
+
 /* Sectie container stijlen */
 .section-container {
     background-color: rgba(255, 255, 255, 0.9);
