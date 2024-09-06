@@ -1,0 +1,46 @@
+/* Logo stijlen */
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.donut {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #7fe0de 0%,
+        #6bc1c3 33%,
+        #55a6a9 66%,
+        #7fe0de 100%
+    );
+    position: relative;
+    margin-right: 10px;
+}
+
+.donut::before {
+    content: '';
+    width: 30px;
+    height: 30px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo-text {
+    color: #313131;
+    font-size: 2em;
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: left;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
