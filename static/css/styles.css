@@ -35,14 +35,19 @@ body, html {
     margin-top: 80px;
 }
 
-/* Media query voor kleinere schermen */
 @media (max-width: 768px) {
-    .content-wrapper {
+    .content-wrapper,
+    .section-container,
+    .gemeente-rapport,
+    .grafiek-container,
+    .aanbevelingen-sectie {
         margin-left: 0;
         margin-right: 0;
         width: 100%; /* Gebruik de volledige breedte van het scherm */
+        max-width: 100%; /* Zorg ervoor dat de maximale breedte ook de volledige breedte is */
     }
 }
+
 
 
 /* Sectie container stijlen */
