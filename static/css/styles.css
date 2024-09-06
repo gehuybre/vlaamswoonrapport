@@ -44,6 +44,7 @@ body, html {
     }
 }
 
+
 /* Sectie container stijlen */
 .section-container {
     background-color: rgba(255, 255, 255, 0.9);
@@ -53,6 +54,13 @@ body, html {
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    /* Media query voor kleinere schermen */
+@media (max-width: 768px) {
+    .content-wrapper {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%; /* Gebruik de volledige breedte van het scherm */
+    }
 
 }
 
@@ -84,6 +92,13 @@ h2 {
     padding: 30px;
     margin-bottom: 40px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    /* Media query voor kleinere schermen */
+@media (max-width: 768px) {
+    .content-wrapper {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%; /* Gebruik de volledige breedte van het scherm */
+    }
 }
 
 .grafiek-container {
@@ -99,6 +114,13 @@ h2 {
     margin-top: 20px;
     margin-bottom: 30px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* Media query voor kleinere schermen */
+@media (max-width: 768px) {
+    .content-wrapper {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%; /* Gebruik de volledige breedte van het scherm */
+    }
 }
 
 .aanbevelingen-sectie h3 {
