@@ -31,7 +31,7 @@ map.invalidateSize();
     }).addTo(maps[provincie]);
 
     // Path to the province-specific GeoJSON file
-    const geojsonPath = `static/geojson_per_provincie/gemeentegrenzen_${provincie.replace(" ", "_").toLowerCase()}.json`;
+    const geojsonPath = `output/static/geojson_per_provincie/gemeentegrenzen_${provincie.replace(" ", "_").toLowerCase()}.json`;
 
     // Fetch and load the GeoJSON data
     fetch(geojsonPath)
