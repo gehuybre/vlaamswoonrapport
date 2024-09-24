@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basemap met Gemeentegrenzen</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" crossorigin=""/>
+    <style>
+        #map {
+            height: 500px; /* Zorg voor voldoende hoogte voor de kaart */
+            width: 100%; /* Zorg dat de kaart de volledige breedte benut */
+        }
+    </style>
+</head>
+<body>
+    <h1>Basemap met Gemeentegrenzen</h1>
+    <div id="map"></div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" crossorigin=""></script>
+
+    <script>
+        // Initialiseer de kaart en stel de startcoördinaten in op Vlaanderen
+        var map = L.map('map').setView([50.85, 4.35], 8);  // Begincoördinaten voor Vlaanderen
+
+        // Voeg een OpenStreetMap laag toe als basislaag
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Laad de GeoJSON-data voor gemeentegrenzen vanuit het lokale bestand
+        fetch('gemeentegrenzen2.json')  // Zorg ervoor dat dit bestand correct bereikbaar is in je directory
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: function (feature) {
+                        return {
+                            color: '#ff7800',  // Kleur van de grenzen
+                            weight: 2  // Dikte van de grenzen
+                        };
+                    },
+                    onEachFeature: function (feature, layer) {
+                        layer.bindPopup('<strong>' + feature.properties.NAAM + '</strong>');  // Toon de gemeentenaam bij een klik
+                    }
+                }).addTo(map);
+            })
+            .catch(error => console.error('Fout bij het laden van de GeoJSON-data:', error));
+    </script>
+</body>
+</html>

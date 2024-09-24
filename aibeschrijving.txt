@@ -1,0 +1,52 @@
+Project Plan for Converting to Tailwind CSS and GSAP
+Objective
+Convert the existing project to use Tailwind CSS for styling and GSAP (GreenSock Animation Platform) for animations. The goal is to maintain and enhance the following functionalities:
+
+A permanent header with a logo and text.
+A map that initially fills the entire viewport, zoomed into the region of Flanders.
+As the user scrolls down, the map remains fixed in the viewport while zooming into a selected municipality.
+Upon full zoom, the text appears prominently next to the logo.
+Further scrolling causes the map to disappear and the first subsection title to become sticky. Below this sticky title, content blocks (graphs, numbers, and text) scroll past. This process repeats for subsequent titles, with alternating white and grey backgrounds for each subsection.
+Functionalities to Implement
+Permanent Header with Logo and Text
+
+Use Tailwind CSS to style a fixed header containing a logo and text.
+Full Viewport Map with Zoom Features
+
+Utilize Leaflet.js for map display and controls.
+Implement GSAP for smooth zoom animations when scrolling to different municipalities.
+Ensure the map remains fixed in the viewport while other content scrolls past.
+Sticky Subsection Titles with Content Scroll
+
+Make subsection titles sticky using Tailwind CSS utilities.
+Implement GSAP scroll-triggered animations for content blocks (graphs, text, etc.).
+Alternating Background Colors for Subsections
+
+Apply Tailwind CSS classes for alternating background colors between subsections (white and grey).
+Tasks Breakdown
+Convert Existing CSS to Tailwind CSS
+
+Identify and replace existing CSS classes in styles.css with equivalent Tailwind CSS utility classes.
+Ensure all styling, such as fonts, colors, margins, padding, etc., is maintained or improved using Tailwind's utility-first approach.
+Implement GSAP Animations
+
+Replace existing animations in animations.js with GSAP-powered animations.
+Integrate GSAP ScrollTrigger for managing scroll-based animations.
+Update HTML Templates
+
+Update base.html and rapport_template.html to incorporate Tailwind CSS classes.
+Ensure all elements are responsive and styled according to the design requirements.
+Include GSAP script references and initialize animations within the script blocks.
+Enhance JavaScript Functionality
+
+Refactor scroll-effects.js to utilize GSAP for scroll animations.
+Adjust map.js to handle map interactions with GSAP for smooth transitions and zooming effects.
+Additional Information Required
+Confirmation on the exact fonts, colors, and any specific Tailwind CSS classes preferred.
+Details on the precise animation effects desired (e.g., speed, easing functions).
+Clarification on any new content or changes to the structure that should be included.
+Next Steps
+Start with the Conversion of CSS to Tailwind CSS
+Integrate GSAP for Animation Handling
+Update the HTML Template Files
+Refactor JavaScript Files for Enhanced Functionality

@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Vlaamse Woonbalans - {{ gemeente }}{% endblock %}
+
+{% block content %}
+<div class="logo-container">
+    <div class="donut"></div>
+    <div class="logo-text">
+        Vlaamse Woonbalans
+        <span class="sub-text">Gemeenterapport {{gemeente}}</span>
+    </div>
+</div>
+
+
+
+<div class="content-wrapper">
+    <div class="content-container">
+        <section>
+            <h1>Hoe houden we wonen betaalbaar in {{ gemeente }}?</h1>
+        </section>
+
+        <section>
+            <h2>Stijgende huizenprijzen in {{ gemeente }}: blijft het betaalbaar?</h2>
+            <p>De prijs van een huis in {{ gemeente }} is gestegen van €{{ start_prijs | int }} in 2014 naar €{{ eind_prijs | int }} in 2023, een stijging van {{ stijging | round(0) | int }}%.</p>
+            <p>Ter vergelijking: in het Vlaams Gewest zijn de vastgoedprijzen in dezelfde periode gestegen van €{{ start_prijs_vlaams | int }} naar €{{ eind_prijs_vlaams | int }}, een stijging van {{ stijging_vlaams | round(0) | int }}%.</p>
+            {% if stijging > stijging_vlaams %}
+            <p>In {{ gemeente }} zijn de prijzen sterker gestegen dan het Vlaamse gemiddelde, wat aangeeft dat de lokale markt nog minder toegankelijk wordt, vooral voor jonge gezinnen die voor het eerst een huis willen kopen. Hogere prijzen maken het voor hen steeds moeilijker om betaalbare woonruimte te vinden en een eigen woning te verwerven in uw gemeente.</p>
+            {% else %}
+            <p>Hoewel de prijsstijging in {{ gemeente }} lager is dan het Vlaamse gemiddelde, blijven de vastgoedprijzen toenemen. Dit maakt het vinden van betaalbare woningen steeds uitdagender, vooral voor jonge gezinnen die voor het eerst een huis willen kopen.</p>
+            {% endif %}
+            {% if eind_prijs > eind_prijs_vlaams %}
+            <p>Bovendien is de absolute prijs van een huis in {{ gemeente }} in 2023 €{{ (eind_prijs - eind_prijs_vlaams) | int }} hoger dan het Vlaamse gemiddelde, wat de betaalbaarheid van wonen nog verder onder druk zet.</p>
+            {% endif %}
+        </section>
+
+
+        {{ vastgoed_grafiek | safe }}
+
+
+
+        <section class="aanbevelingen-sectie">
+            <h3>Aanbevelingen vanuit Embuild Vlaanderen</h3>
+            <ul class="aanbevelingen-tekst">
+                <li>Stimuleer actief kernversterking en verdichting, niet alleen door bouwmogelijkheden te schrappen, maar ook door hogere dichtheden te bevorderen in kernen en goed gelegen gebieden.</li>
+                <li>Zet in op efficiëntere processen, bijvoorbeeld door digitalisering, om de doorlooptijd en dus de bouwkosten te verminderen.</li>
+            </ul>
+        </section>
+
+
+
+        <section>
+            <h2>Steeds meer en kleinere huishoudens</h2>
+            <p>De bevolking van {{ gemeente }} zal naar verwachting groeien van {{ bevolking_2023 }} huishoudens in 2023 naar {{ bevolking_2040 }} huishoudens in 2040, een toename van {{ groei | round(0) }}%.</p>
+            {% if groei > groei_vlaams %}
+            <p>In {{ gemeente }} is de groei van het aantal huishoudens sterker dan het Vlaamse gemiddelde van {{ groei_vlaams | round(0) }}%. Dit kan de druk op de woningmarkt verhogen en de betaalbaarheid van woningen verder onder druk zetten. Vooral de stijging van het aantal eenpersoonshuishoudens, dat naar verwachting ook sneller zal groeien, maakt het nodig om betaalbare, kleinere woningen aan te bieden die aan de behoeften van deze doelgroep voldoen.</p>
+            {% else %}
+            <p>Hoewel de groei van het aantal huishoudens in {{ gemeente }} lager is dan het Vlaamse gemiddelde van {{ groei_vlaams | round(0) }}%, blijft de vraag naar woningen stijgen. Zelfs bij een iets lagere groei betekent dit dat er meer woningen nodig zijn om aan de vraag te voldoen. Vooral de toenemende vraag naar woningen voor kleinere huishoudens, zoals eenpersoonshuishoudens, moet worden aangepakt om de markt in balans te houden.</p>
+            {% endif %}
+            <p>Daarnaast groeit het aantal eenpersoonshuishoudens in {{ gemeente }} naar verwachting van {{ eenpersoonshuishoudens_2023 }} in 2023 naar {{ eenpersoonshuishoudens_2040 }} in 2040, een stijging van {{ groei_eenpersoonshuishoudens | round(0) }}%.</p>
+            {% if groei_eenpersoonshuishoudens > groei_eenpersoonshuishoudens_vlaams %}
+            <p>Deze groei ligt boven het Vlaamse gemiddelde van {{ groei_eenpersoonshuishoudens_vlaams | round(0) }}%, wat aangeeft dat er meer vraag zal zijn naar kleinere, betaalbare woningen in uw gemeente.</p>
+            {% else %}
+            <p>Hoewel deze groei iets lager is dan het Vlaamse gemiddelde van {{ groei_eenpersoonshuishoudens_vlaams | round(0) }}%, blijft het aandeel eenpersoonshuishoudens stijgen, wat de noodzaak benadrukt om voldoende kleine en betaalbare woningen te ontwikkelen.</p>
+            {% endif %}
+        </section>
+
+
+
+        {{ huishoudens_grafiek | safe }}
+
+        <section class="aanbevelingen-sectie">
+            <h3>Aanbevelingen vanuit Embuild Vlaanderen</h3>
+            <ul class="aanbevelingen-tekst">
+                <li>Overweeg versoepeling om meer flexibiliteit toe te laten, zoals het toestaan van meergezinswoningen of kangoeroewoningen in bepaalde zones.</li>
+                <li>Eigen gebouwen kunnen dienen als uithangbord voor duurzame praktijken, bijvoorbeeld door energieprestaties te verbeteren met behulp van een EnergiePrestatieContract.</li>
+                <li>Door de oprichting van publieke-private partnerschappen (PPP's) kunnen gemeenten samenwerken met de private sector en burgers om grootschalige duurzaamheidsprojecten te ontwikkelen en te financieren.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>EPC-labels in {{ gemeente }}</h2>
+            <p>Hieronder ziet u de verdeling van EPC-labels voor bestaande woningen in {{ gemeente }} vergeleken met het Vlaamse Gewest.</p>
+        </section>
+
+        {{ epc_grafiek | safe }}
+
+        <section class="aanbevelingen-sectie">
+            <h3>Aanbevelingen vanuit Embuild Vlaanderen</h3>
+            <ul class="aanbevelingen-tekst">
+                <li>Door het aankoopbeleid te richten op duurzame producten en diensten kunnen nieuwe, duurzame oplossingen worden gestimuleerd.</li>
+                <li>Help burgers om zelf ook te investeren door in te zetten op burgerparticipatie, energiecoöperaties of door mobiele energiehuizen in te zetten die advies geven over duurzame praktijken.</li>
+                <li>Pas infrastructuur aan voor fietsen en lopen, openbaar vervoer te verbeteren en het gebruik van elektrische voertuigen te ondersteunen door voldoende laadpalen te installeren.</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Klimaatimpact in {{ gemeente }}: risico's en kansen</h2>
+            <p>Het aantal kwetsbare personen blootgesteld aan hittestress in {{ gemeente }} stijgt van {{ hittestress_2030 | round(0) | int }}% in 2030 naar {{ hittestress_2050 | round(0) | int }}% in 2050, een toename van {{ stijging_hittestress | round(0) | int }}%.</p>
+            <p>Ter vergelijking, in het Vlaams Gewest stijgt het aantal kwetsbare personen blootgesteld aan hittestress van {{ hittestress_2030_vlaams | round(0) | int }}% naar {{ hittestress_2050_vlaams | round(0) | int }}%, een toename van {{ stijging_hittestress_vlaams | round(0) | int }}%.</p>
+            <p>Het aandeel gebouwen met mogelijke wateroverlast in {{ gemeente }} neemt toe van {{ wateroverlast_huidig | round(0) | int }}% in het huidige klimaat naar {{ wateroverlast_2050 | round(0) | int }}% in 2050, een stijging van {{ stijging_wateroverlast | round(0) | int }}%.</p>
+            <p>In het Vlaams Gewest zien we een toename van {{ wateroverlast_huidig_vlaams | round(0) | int }}% naar {{ wateroverlast_2050_vlaams | round(0) | int }}%, een stijging van {{ stijging_wateroverlast_vlaams | round(0) | int }}%.</p>
+            {% if stijging_hittestress > stijging_hittestress_vlaams or stijging_wateroverlast > stijging_wateroverlast_vlaams %}
+            <p>De klimaatimpact in {{ gemeente }} lijkt groter dan het Vlaamse gemiddelde, wat wijst op een grotere kwetsbaarheid voor zowel hittestress als wateroverlast. Het is daarom belangrijk dat er lokaal wordt ingezet op klimaatadaptieve maatregelen.</p>
+            {% else %}
+            <p>Hoewel de toename in {{ gemeente }} lager is dan het Vlaamse gemiddelde, blijft de stijging van hittestress en wateroverlast zorgwekkend. Lokale aanpassingen kunnen helpen de risico's te beheersen.</p>
+            {% endif %}
+        </section>
+
+        {{ klimaatimpact_grafiek | safe }}
+
+        <section class="aanbevelingen-sectie">
+            <h3>Aanbevelingen vanuit Embuild Vlaanderen</h3>
+            <ul class="aanbevelingen-tekst"></ul>
+                <li>Investeer in infrastructuur die bestand is tegen extreme weersomstandigheden zoals hittegolven, overstromingen en droogte, bijvoorbeeld door groene daken, permeabele bestrating en regenwateropvangsystemen te implementeren.</li>
+                <li>De integratie van klimaatmaatregelen in andere beleidsdomeinen zoals gezondheid, huisvesting en economische ontwikkeling, kan de effectiviteit versterken.</li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

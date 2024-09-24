@@ -1,0 +1,3 @@
+Plotly
+Jinja2
+Matplotlib

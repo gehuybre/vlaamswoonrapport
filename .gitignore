@@ -1,0 +1,14 @@
+# Ignore all files and directories
+*
+
+# Except the output directory
+!output/
+
+# Ignore everything inside the output directory
+output/*
+
+# Except the necessary files within the output directory
+!output/home.html
+!output/report_*.html
+!output/static/
+git add .gitignore
