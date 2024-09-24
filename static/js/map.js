@@ -1,101 +1,117 @@
-let map, targetFeature, currentZoom, currentCenter, targetLayer;
+// Initialize an object to hold all Leaflet maps
+let maps = {};
+
+// Configuration constants
 const INITIAL_ZOOM = 8;
 const MAX_ZOOM = 13;
 
-function initializeMap(kleuren, gemeente) {
-    map = L.map('map', {
-        center: [50.85, 4.35],
+// Function to initialize a map for a specific province
+function initializeMap(mapId, provincie) {
+    // Create a new Leaflet map instance
+    maps[provincie] = L.map(mapId, {
+        center: [50.85, 4.35], // Default center; adjust as needed for each province
         zoom: INITIAL_ZOOM,
         zoomControl: false,
-        dragging: false,
-        touchZoom: false,
-        doubleClickZoom: false,
-        scrollWheelZoom: false,
-        boxZoom: false,
-        keyboard: false,
+        dragging: true, // Enable dragging for interactivity
+        touchZoom: true,
+        doubleClickZoom: true,
+        scrollWheelZoom: true,
+        boxZoom: true,
+        keyboard: true,
     });
 
-    currentZoom = INITIAL_ZOOM;
-    currentCenter = map.getCenter();
+    // Add CartoDB Positron base layer
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+        maxZoom: 19
+    }).addTo(maps[provincie]);
 
-    fetch('gemeentegrenzen2.json')
+    // Path to the province-specific GeoJSON file
+    const geojsonPath = `static/geojson_per_provincie/gemeentegrenzen_${provincie.replace(" ", "_").toLowerCase()}.json`;
+
+    // Fetch and load the GeoJSON data
+    fetch(geojsonPath)
         .then(response => response.json())
         .then(data => {
-            L.geoJSON(data, {
+            // Add GeoJSON layer to the map
+            const geojsonLayer = L.geoJSON(data, {
                 style: function (feature) {
-                    var fillColor = feature.properties.NAAM === gemeente ? kleuren[0] : '#f7f7f7';
+                    // Style for all municipalities
                     return {
                         color: '#000000',
                         weight: 2,
                         fillOpacity: 0.5,
-                        fillColor: fillColor
+                        fillColor: '#7fe0de'
                     };
                 },
                 onEachFeature: function (feature, layer) {
+                    // Bind a popup with the municipality name
                     layer.bindPopup('<strong>' + feature.properties.NAAM + '</strong>');
-                    
-                    // Store the layer of the selected "gemeente"
-                    if (feature.properties.NAAM === gemeente) {
-                        targetLayer = layer;
-                    }
+
+                    // Add click event to navigate to the municipality's report
+                    layer.on('click', function (e) {
+                        const gemeenteNaam = feature.properties.NAAM.replace(/\s+/g, '_');
+                        window.location.href = `report_${gemeenteNaam}.html`;
+                    });
+                    layer.on({
+                        mouseover: function(e) {
+                            var layer = e.target;
+                            layer.setStyle({
+                                fillColor: '#55a6a9',
+                                fillOpacity: 0.7
+                            });
+                            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                                layer.bringToFront();
+                            }
+                        },
+                        mouseout: function(e) {
+                            geojsonLayer.resetStyle(e.target);
+                        },
+                        click: function(e) {
+                            const gemeenteNaam = e.target.feature.properties.NAAM.replace(/\s+/g, '_');
+                            window.location.href = `report_${gemeenteNaam}.html`;
+                        }
+                    });
                 }
-            }).addTo(map);
+            }).addTo(maps[provincie]);
 
-            targetFeature = data.features.find(f => f.properties.NAAM === gemeente);
+            // Fit the map view to the GeoJSON layer
+            maps[provincie].fitBounds(geojsonLayer.getBounds());
 
-            if (window.initializeScrollEffects) {
-                window.initializeScrollEffects(gemeente);
-            }
-
-            // Listen for zoom changes to show/hide the label
-            map.on('zoomend', handleZoomChange);
+            // Listen for zoom changes to show/hide labels
+            maps[provincie].on('zoomend', function () {
+                handleZoomChange(maps[provincie], geojsonLayer);
+            });
         })
-        .catch(error => console.error('Fout bij het laden van de GeoJSON-data:', error));
+        .catch(error => console.error(`Error loading GeoJSON for ${provincie}:`, error));
 }
 
-function handleZoomChange() {
-    if (!targetLayer) return;
-
-    if (map.getZoom() === MAX_ZOOM) {
-        // Show the label at max zoom level
-        targetLayer.bindTooltip(targetLayer.feature.properties.NAAM, {
-            permanent: true,
-            direction: 'center',
-            className: 'gemeente-label'
-        }).openTooltip();
+// Function to handle zoom changes for labels (if applicable)
+function handleZoomChange(mapInstance, geojsonLayer) {
+    if (mapInstance.getZoom() === MAX_ZOOM) {
+        // Iterate over each layer in the GeoJSON
+        geojsonLayer.eachLayer(function (layer) {
+            if (layer.feature.properties && layer.feature.properties.NAAM) {
+                // Bind a tooltip with the municipality name
+                layer.bindTooltip(layer.feature.properties.NAAM, {
+                    permanent: true,
+                    direction: 'center',
+                    className: 'gemeente-label'
+                }).openTooltip();
+            }
+        });
     } else {
-        // Remove the label at other zoom levels
-        targetLayer.unbindTooltip();
+        // Remove all tooltips
+        geojsonLayer.eachLayer(function (layer) {
+            layer.unbindTooltip();
+        });
     }
 }
 
+// Easing function for smooth zoom transitions (if used elsewhere)
 function easeInOutCubic(t) {
     return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
 }
 
-function zoomToGemeente(progress) {
-    if (!map || !targetFeature) return;
-
-    const bounds = L.geoJSON(targetFeature).getBounds();
-    const initialBounds = map.getBounds();
-
-    const easedProgress = easeInOutCubic(progress);
-
-    const zoomDiff = MAX_ZOOM - INITIAL_ZOOM;
-    const targetZoom = INITIAL_ZOOM + (zoomDiff * easedProgress);
-
-    const initialCenter = initialBounds.getCenter();
-    const targetCenter = bounds.getCenter();
-    const targetLat = initialCenter.lat + (targetCenter.lat - initialCenter.lat) * easedProgress;
-    const targetLng = initialCenter.lng + (targetCenter.lng - initialCenter.lng) * easedProgress;
-
-    // Interpolate between current and target values
-    currentZoom += (targetZoom - currentZoom) * 0.1;
-    currentCenter.lat += (targetLat - currentCenter.lat) * 0.1;
-    currentCenter.lng += (targetLng - currentCenter.lng) * 0.1;
-
-    map.setView(currentCenter, currentZoom, {animate: false});
-}
-
+// Expose the initializeMap function to the global scope
 window.initializeMap = initializeMap;
-window.zoomToGemeente = zoomToGemeente;

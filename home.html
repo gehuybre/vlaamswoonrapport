@@ -1,4 +1,3 @@
-<!-- homepage.html -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -18,14 +17,76 @@
         </div>
     </div>
 
-    <!-- Search bar for filtering municipalities -->
+    <!-- Search bar voor filtering van gemeenten -->
     <div class="search-container">
         <input type="text" id="search-bar" placeholder="Zoek uw gemeente..." oninput="filterGemeente()" />
     </div>
 
-    <!-- Map container -->
-    <div id="map-container">
-        <div id="map"></div>
+    <!-- Navigatiemenu voor provincies -->
+    <nav class="province-nav">
+        <ul>
+            <li><a href="#Antwerpen">Antwerpen</a></li>
+            <li><a href="#Limburg">Limburg</a></li>
+            <li><a href="#Oost-Vlaanderen">Oost-Vlaanderen</a></li>
+            <li><a href="#Vlaams-Brabant">Vlaams-Brabant</a></li>
+            <li><a href="#West-Vlaanderen">West-Vlaanderen</a></li>
+        </ul>
+    </nav>
+
+    <!-- Provincie Secties -->
+    <div class="section-container" id="Antwerpen">
+        <h2>Antwerpen</h2>
+        <p>Welkom bij de Vlaamse Woonbalans voor Antwerpen. Hier vindt u interactieve kaarten en rapporten die inzicht geven in de woonmarkt, huishoudensgroei, EPC-labels en klimaatimpact binnen de provincie Antwerpen.</p>
+        
+        <!-- Kaart Container -->
+        <div id="map-1" class="map"></div>
+
+        <!-- Beschrijving of extra informatie per provincie -->
+        <p>Gebruik de kaart om specifieke gemeenten binnen Antwerpen te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
+    </div>
+
+    <div class="section-container" id="Limburg">
+        <h2>Limburg</h2>
+        <p>Welkom bij de Vlaamse Woonbalans voor Limburg. Hier vindt u interactieve kaarten en rapporten die inzicht geven in de woonmarkt, huishoudensgroei, EPC-labels en klimaatimpact binnen de provincie Limburg.</p>
+        
+        <!-- Kaart Container -->
+        <div id="map-2" class="map"></div>
+
+        <!-- Beschrijving of extra informatie per provincie -->
+        <p>Gebruik de kaart om specifieke gemeenten binnen Limburg te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
+    </div>
+
+    <div class="section-container" id="Oost-Vlaanderen">
+        <h2>Oost-Vlaanderen</h2>
+        <p>Welkom bij de Vlaamse Woonbalans voor Oost-Vlaanderen. Hier vindt u interactieve kaarten en rapporten die inzicht geven in de woonmarkt, huishoudensgroei, EPC-labels en klimaatimpact binnen de provincie Oost-Vlaanderen.</p>
+        
+        <!-- Kaart Container -->
+        <div id="map-3" class="map"></div>
+
+        <!-- Beschrijving of extra informatie per provincie -->
+        <p>Gebruik de kaart om specifieke gemeenten binnen Oost-Vlaanderen te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
+    </div>
+
+    <div class="section-container" id="Vlaams-Brabant">
+        <h2>Vlaams-Brabant</h2>
+        <p>Welkom bij de Vlaamse Woonbalans voor Vlaams-Brabant. Hier vindt u interactieve kaarten en rapporten die inzicht geven in de woonmarkt, huishoudensgroei, EPC-labels en klimaatimpact binnen de provincie Vlaams-Brabant.</p>
+        
+        <!-- Kaart Container -->
+        <div id="map-4" class="map"></div>
+
+        <!-- Beschrijving of extra informatie per provincie -->
+        <p>Gebruik de kaart om specifieke gemeenten binnen Vlaams-Brabant te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
+    </div>
+
+    <div class="section-container" id="West-Vlaanderen">
+        <h2>West-Vlaanderen</h2>
+        <p>Welkom bij de Vlaamse Woonbalans voor West-Vlaanderen. Hier vindt u interactieve kaarten en rapporten die inzicht geven in de woonmarkt, huishoudensgroei, EPC-labels en klimaatimpact binnen de provincie West-Vlaanderen.</p>
+        
+        <!-- Kaart Container -->
+        <div id="map-5" class="map"></div>
+
+        <!-- Beschrijving of extra informatie per provincie -->
+        <p>Gebruik de kaart om specifieke gemeenten binnen West-Vlaanderen te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
     </div>
 
     <!-- Scroll indicator -->
@@ -34,23 +95,23 @@
         <div class="arrow-down"></div>
     </div>
 
-    <!-- Optional additional content can go here -->
+    <!-- Optionele extra content kan hier komen -->
     <div class="content-wrapper">
-        <!-- Additional content or sections can be added here -->
+        <!-- Extra content of secties kunnen hier worden toegevoegd -->
     </div>
 
-    <!-- Scripts for map and additional functionalities -->
-    <script src="static/js/map_home.js"></script>
+    <!-- Scripts voor kaart en aanvullende functionaliteiten -->
+    <script src="static/js/map.js"></script>
     <script src="static/js/scroll-effects.js"></script>
     <script src="static/js/animations.js"></script>
     <script>
-        // Initialize the map on page load
+        // Initializeer de kaarten voor elke provincie
         document.addEventListener('DOMContentLoaded', function() {
-            const options = {
-                center: [50.85, 4.35],
-                zoom: 8
-            };
-            initializeMap(["#FF0000", "#00FF00"], "", options); // Initialize without a specific gemeente
+            initializeMap('map-1', 'Antwerpen');
+            initializeMap('map-2', 'Limburg');
+            initializeMap('map-3', 'Oost-Vlaanderen');
+            initializeMap('map-4', 'Vlaams-Brabant');
+            initializeMap('map-5', 'West-Vlaanderen');
             initAnimations();
         });
     </script>

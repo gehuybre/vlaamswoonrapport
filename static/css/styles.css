@@ -48,19 +48,15 @@ body, html {
     }
 }
 
-
-
 /* Sectie container stijlen */
 .section-container {
     background-color: rgba(255, 255, 255, 0.9);
-    margin: 100vh 0;  /* Ruimte tussen secties */
+    margin: 50px 0;  /* Reduced margin for better spacing between sections */
     padding: 40px;
-    max-width: 40%;
+    max-width: 800px; /* Increased max-width for better readability */
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    
-
 }
 
 /* Stijlen voor koppen en tekst */
@@ -77,7 +73,6 @@ h2 {
     margin-top: 30px;
     border-bottom: 2px solid #6bc1c3;
 }
-
 
 /* Overige stijlen voor andere componenten */
 .highlight {
@@ -146,7 +141,6 @@ footer {
     align-items: center;
     justify-content: flex-start;
     z-index: 9999;
-
 }
 
 .donut {
@@ -187,6 +181,7 @@ footer {
     align-items: flex-start;
     margin-bottom: 20px; /* Add some white space at the bottom */
     margin-top: 20px; 
+}
 
 .sub-text {
     font-size: 0.8em;
@@ -203,8 +198,6 @@ footer {
     margin-top: 10px;
     color: #313131;
 }
-
-
 
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
@@ -227,4 +220,61 @@ footer {
     padding: 2px 5px; /* Padding around the text */
     border-radius: 4px; /* Rounded corners */
     text-align: center; /* Center align the text */
+}
+
+/* Styles for individual province maps */
+.map {
+    width: 100%;
+    height: 400px; /* Adjust height as needed */
+    margin-top: 20px;
+    border: 2px solid #7fe0de;
+    border-radius: 8px;
+}
+
+/* Adjustments to section-container for better spacing */
+.section-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 50px 0;  /* Reduced margin for better spacing between sections */
+    padding: 40px;
+    max-width: 800px; /* Increased max-width for better readability */
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* Navigation Menu Styles */
+.province-nav {
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.province-nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.province-nav li {
+    margin: 5px 10px;
+}
+
+.province-nav a {
+    text-decoration: none;
+    color: #7fe0de;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s;
+}
+
+.province-nav a:hover {
+    border-bottom: 2px solid #7fe0de;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .map {
+        height: 300px; /* Reduce map height on smaller screens */
+    }
 }
