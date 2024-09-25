@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- CSS for Cookie Consent -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+    <!-- JavaScript for Cookie Consent -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+
 </head>
 <body>
     <div class="logo-container">
@@ -89,15 +94,31 @@
         <p>Gebruik de kaart om specifieke gemeenten binnen West-Vlaanderen te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
     </div>
 
-    <!-- Scroll indicator -->
-    <div id="scroll-indicator">
-        <p>Scroll naar beneden</p>
-        <div class="arrow-down"></div>
-    </div>
-
-    <!-- Optionele extra content kan hier komen -->
     <div class="content-wrapper">
-        <!-- Extra content of secties kunnen hier worden toegevoegd -->
+        <script>
+            window.addEventListener("load", function(){
+              window.cookieconsent.initialise({
+                "palette": {
+                  "popup": {
+                    "background": "#000",
+                    "text": "#fff"
+                  },
+                  "button": {
+                    "background": "#f1d600",
+                    "text": "#000"
+                  }
+                },
+                "theme": "classic",
+                "content": {
+                  "message": "Deze website gebruikt cookies om uw ervaring te verbeteren.",
+                  "dismiss": "OK!",
+                  "link": "Lees meer",
+                  "href": "https://www.iubenda.com/privacy-policy/72287265/cookie-policy?an=no&s_ck=false&newmarkup=yes"  // Link naar je privacybeleid of cookiebeleid
+                }
+              })
+            });
+          </script>
+          
     </div>
 
     <!-- Scripts voor kaart en aanvullende functionaliteiten -->
