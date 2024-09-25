@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
     <!-- JavaScript for Cookie Consent -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
-
 </head>
 <body>
     <div class="logo-container">
@@ -94,6 +93,8 @@
         <p>Gebruik de kaart om specifieke gemeenten binnen West-Vlaanderen te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
     </div>
 
+
+    <!-- Optionele extra content kan hier komen -->
     <div class="content-wrapper">
         <script>
             window.addEventListener("load", function(){
@@ -122,9 +123,9 @@
     </div>
 
     <!-- Scripts voor kaart en aanvullende functionaliteiten -->
-    <script src="static/js/map.js"></script>
-    <script src="static/js/scroll-effects.js"></script>
-    <script src="static/js/animations.js"></script>
+    <script src="static/js/map.js" defer></script>
+
+
     <script>
         // Initializeer de kaarten voor elke provincie
         document.addEventListener('DOMContentLoaded', function() {
