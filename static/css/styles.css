@@ -9,6 +9,7 @@ body, html {
     color: #313131;
 }
 
+/* Map Container */
 #map-container {
     position: fixed;
     top: 50%;
@@ -24,36 +25,22 @@ body, html {
     height: 100%;
 }
 
+/* Content Wrapper */
 .content-wrapper {
     position: relative;
     z-index: 2;
-    background-color: #b4e8f133;
+    background-color: rgba(180, 232, 241, 0.2);
     padding: 20px;
     max-width: 800px;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 80px;
-}
-
-@media (max-width: 768px) {
-    .content-wrapper,
-    .section-container,
-    .gemeente-rapport,
-    .grafiek-container,
-    .aanbevelingen-sectie {
-        margin-left: 0;
-        margin-right: 0;
-        width: 100%; /* Gebruik de volledige breedte van het scherm */
-        max-width: 100%; /* Zorg ervoor dat de maximale breedte ook de volledige breedte is */
-    }
+    margin: 80px auto 0 auto;
 }
 
 /* Sectie container stijlen */
 .section-container {
     background-color: rgba(255, 255, 255, 0.9);
-    margin: 50px 0;  /* Reduced margin for better spacing between sections */
+    margin: 50px 0;
     padding: 40px;
-    max-width: 800px; /* Increased max-width for better readability */
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
@@ -74,23 +61,27 @@ h2 {
     border-bottom: 2px solid #6bc1c3;
 }
 
-/* Overige stijlen voor andere componenten */
 .highlight {
     background-color: #7fe0de;
     padding: 2px 5px;
     font-weight: bold;
 }
 
-.gemeente-rapport {
-    background-color: rgba(255, 255, 255, 0);
-    padding: 30px;
+/* Overige componenten */
+.gemeente-rapport,
+.grafiek-container,
+.aanbevelingen-sectie {
     margin-bottom: 40px;
+}
+
+.gemeente-rapport {
+    background-color: transparent;
+    padding: 30px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .grafiek-container {
     margin-top: 20px;
-    margin-bottom: 20px;
     height: 35%;
 }
 
@@ -98,8 +89,6 @@ h2 {
     background-color: #f7f7f7;
     border-left: 4px solid #7fe0de;
     padding: 15px 20px;
-    margin-top: 20px;
-    margin-bottom: 30px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -119,8 +108,7 @@ h2 {
 
 ul.aanbevelingen-tekst {
     padding-left: 20px;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin: 1em 0;
 }
 
 footer {
@@ -132,15 +120,14 @@ footer {
 
 /* Logo stijlen */
 .logo-container {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
+    z-index: 10;
     width: 100%;
-    background-color: white;
+    background-color: #fff;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    z-index: 9999;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .donut {
@@ -174,13 +161,10 @@ footer {
     font-size: 2em;
     font-weight: 800;
     line-height: 1.1;
-    text-align: left;
-    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 20px; /* Add some white space at the bottom */
-    margin-top: 20px; 
+    margin: 20px 0;
 }
 
 .sub-text {
@@ -199,6 +183,7 @@ footer {
     color: #313131;
 }
 
+/* Animaties */
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
@@ -213,42 +198,33 @@ footer {
 
 /* Custom styles for gemeente labels */
 .gemeente-label {
-    font-weight: bold; /* Make the text bold */
-    background-color: rgba(255, 255, 255, 0); /* Transparent background */
-    color: #313131; /* Text color */
-    border: none; /* Remove any border */
-    padding: 2px 5px; /* Padding around the text */
-    border-radius: 4px; /* Rounded corners */
-    text-align: center; /* Center align the text */
+    font-weight: bold;
+    background-color: transparent;
+    color: #313131;
+    border: none;
+    padding: 2px 5px;
+    border-radius: 4px;
+    text-align: center;
 }
 
 /* Styles for individual province maps */
 .map {
     width: 100%;
-    height: 400px; /* Adjust height as needed */
+    height: 400px;
     margin-top: 20px;
     border: 2px solid #7fe0de;
     border-radius: 8px;
 }
 
-/* Adjustments to section-container for better spacing */
-.section-container {
-    background-color: rgba(255, 255, 255, 0.9);
-    margin: 50px 0;  /* Reduced margin for better spacing between sections */
-    padding: 40px;
-    max-width: 800px; /* Increased max-width for better readability */
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
-
 /* Navigation Menu Styles */
-.province-nav {
+.province-nav,
+.main-nav {
     margin: 20px auto;
     max-width: 800px;
 }
 
-.province-nav ul {
+.province-nav ul,
+.main-nav ul {
     list-style: none;
     padding: 0;
     display: flex;
@@ -256,25 +232,53 @@ footer {
     flex-wrap: wrap;
 }
 
-.province-nav li {
+.province-nav li,
+.main-nav li {
     margin: 5px 10px;
 }
 
-.province-nav a {
+.province-nav a,
+.main-nav a {
     text-decoration: none;
     color: #7fe0de;
     font-weight: bold;
-    border-bottom: 2px solid transparent;
-    transition: border-bottom 0.3s;
+    padding: 10px 20px;
+    display: block;
+    transition: color 0.3s ease, border-bottom 0.3s;
 }
 
-.province-nav a:hover {
+.province-nav a:hover,
+.main-nav a:hover {
+    color: #55a6a9;
     border-bottom: 2px solid #7fe0de;
 }
 
-/* Responsive adjustments for smaller screens */
+/* Verwijder standaard hyperlink-stijlen voor logo-link */
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.logo-link:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+/* Responsieve aanpassingen voor kleinere schermen */
 @media (max-width: 768px) {
+    .content-wrapper,
+    .section-container,
+    .gemeente-rapport,
+    .grafiek-container,
+    .aanbevelingen-sectie {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
     .map {
-        height: 300px; /* Reduce map height on smaller screens */
+        height: 300px;
     }
 }
