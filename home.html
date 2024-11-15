@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vlaamse Woonbalans - Gemeente Selectie</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- CSS for Cookie Consent -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+    <!-- JavaScript for Cookie Consent -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+</head>
+<body>
+    <div class="logo-container">
+        <div class="donut"></div>
+        <div class="logo-text">
+            Vlaamse Woonbalans
+            <span class="sub-text">Zoom in en selecteer uw gemeente</span>
+        </div>
+    </div>
+
+    <!-- Navigatiemenu voor provincies -->
+    <nav class="province-nav">
+        <ul>
+            <li><a href="#Antwerpen">Antwerpen</a></li>
+            <li><a href="#Limburg">Limburg</a></li>
+            <li><a href="#Oost-Vlaanderen">Oost-Vlaanderen</a></li>
+            <li><a href="#Vlaams-Brabant">Vlaams-Brabant</a></li>
+            <li><a href="#West-Vlaanderen">West-Vlaanderen</a></li>
+        </ul>
+    </nav>
+
+    <!-- Provincie Secties -->
+    <div class="section-container" id="Antwerpen">
+        <h2>Antwerpen</h2>
+        <p>Welkom bij de Vlaamse Woonbalans voor Antwerpen. Hier vindt u interactieve kaarten en rapporten die inzicht geven in de woonmarkt, huishoudensgroei, EPC-labels en klimaatimpact binnen de provincie Antwerpen.</p>
+        
+        <!-- Kaart Container -->
+        <div id="map-1" class="map"></div>
+
+        <!-- Beschrijving of extra informatie per provincie -->
+        <p>Gebruik de kaart om specifieke gemeenten binnen Antwerpen te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
+    </div>
+
+    <div class="section-container" id="Limburg">
+        <h2>Limburg</h2>
+        <p>Welkom bij de Vlaamse Woonbalans voor Limburg. Hier vindt u interactieve kaarten en rapporten die inzicht geven in de woonmarkt, huishoudensgroei, EPC-labels en klimaatimpact binnen de provincie Limburg.</p>
+        
+        <!-- Kaart Container -->
+        <div id="map-2" class="map"></div>
+
+        <!-- Beschrijving of extra informatie per provincie -->
+        <p>Gebruik de kaart om specifieke gemeenten binnen Limburg te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
+    </div>
+
+    <div class="section-container" id="Oost-Vlaanderen">
+        <h2>Oost-Vlaanderen</h2>
+        <p>Welkom bij de Vlaamse Woonbalans voor Oost-Vlaanderen. Hier vindt u interactieve kaarten en rapporten die inzicht geven in de woonmarkt, huishoudensgroei, EPC-labels en klimaatimpact binnen de provincie Oost-Vlaanderen.</p>
+        
+        <!-- Kaart Container -->
+        <div id="map-3" class="map"></div>
+
+        <!-- Beschrijving of extra informatie per provincie -->
+        <p>Gebruik de kaart om specifieke gemeenten binnen Oost-Vlaanderen te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
+    </div>
+
+    <div class="section-container" id="Vlaams-Brabant">
+        <h2>Vlaams-Brabant</h2>
+        <p>Welkom bij de Vlaamse Woonbalans voor Vlaams-Brabant. Hier vindt u interactieve kaarten en rapporten die inzicht geven in de woonmarkt, huishoudensgroei, EPC-labels en klimaatimpact binnen de provincie Vlaams-Brabant.</p>
+        
+        <!-- Kaart Container -->
+        <div id="map-4" class="map"></div>
+
+        <!-- Beschrijving of extra informatie per provincie -->
+        <p>Gebruik de kaart om specifieke gemeenten binnen Vlaams-Brabant te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
+    </div>
+
+    <div class="section-container" id="West-Vlaanderen">
+        <h2>West-Vlaanderen</h2>
+        <p>Welkom bij de Vlaamse Woonbalans voor West-Vlaanderen. Hier vindt u interactieve kaarten en rapporten die inzicht geven in de woonmarkt, huishoudensgroei, EPC-labels en klimaatimpact binnen de provincie West-Vlaanderen.</p>
+        
+        <!-- Kaart Container -->
+        <div id="map-5" class="map"></div>
+
+        <!-- Beschrijving of extra informatie per provincie -->
+        <p>Gebruik de kaart om specifieke gemeenten binnen West-Vlaanderen te verkennen. Klik op een gemeente om gedetailleerde rapporten te bekijken.</p>
+    </div>
+
+
+    <!-- Optionele extra content kan hier komen -->
+    <div class="content-wrapper">
+        <script>
+            window.addEventListener("load", function(){
+              window.cookieconsent.initialise({
+                "palette": {
+                  "popup": {
+                    "background": "#000",
+                    "text": "#fff"
+                  },
+                  "button": {
+                    "background": "#f1d600",
+                    "text": "#000"
+                  }
+                },
+                "theme": "classic",
+                "content": {
+                  "message": "Deze website gebruikt cookies om uw ervaring te verbeteren.",
+                  "dismiss": "OK!",
+                  "link": "Lees meer",
+                  "href": "https://www.iubenda.com/privacy-policy/72287265/cookie-policy?an=no&s_ck=false&newmarkup=yes"  // Link naar je privacybeleid of cookiebeleid
+                }
+              })
+            });
+          </script>
+          
+    </div>
+
+    <!-- Scripts voor kaart en aanvullende functionaliteiten -->
+    <script src="static/js/map.js" defer></script>
+
+
+    <script>
+        // Initializeer de kaarten voor elke provincie
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMap('map-1', 'Antwerpen');
+            initializeMap('map-2', 'Limburg');
+            initializeMap('map-3', 'Oost-Vlaanderen');
+            initializeMap('map-4', 'Vlaams-Brabant');
+            initializeMap('map-5', 'West-Vlaanderen');
+            initAnimations();
+        });
+    </script>
+</body>
+</html>
